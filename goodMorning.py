@@ -9,6 +9,8 @@ def main():
     engine.say("Good morning")
     engine.say("It is ")
     engine.say(time_to_string())
+    engine.say(crypto_writer.crypto_stat_string(
+            ['bitcoin', 'ethereum'], 'usd'))
     engine.runAndWait()
     engine.stop()
 
