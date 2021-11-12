@@ -1,20 +1,43 @@
 import crypto_writer
 import pyttsx3
 import time
+import datetime
 
 
 def main():
 
-    engine = pyttsx3.init()
-    engine.say("Good morning")
-    engine.say("It is ")
-    engine.say(time_to_string())
-    engine.say(crypto_writer.crypto_stat_string(
-            ['bitcoin', 'ethereum'], 'usd'))
-    engine.runAndWait()
-    engine.stop()
+    #TODO: Find some way for the user to input this time instead of just a hard-coded value
+    alarm_time = "05:30:00"
 
+    while True:
+        time.sleep(1)
+        current_time = datetime.datetime.now()
+        now_str = current_time.strftime("%H:%M:%S")
 
+        if now_str == alarm_time:
+            engine = pyttsx3.init()
+
+            hour = current_time.hour
+            if hour > 12:
+                engine.say("Good Afternoon")
+  
+            else:
+                engine.say("Good Morning")
+
+            engine.say("It is ")
+            engine.say(time_to_string())
+
+            #TODO: Find some way for the user to select news sources
+            engine.say(crypto_writer.crypto_stat_string(
+                    ['bitcoin', 'ethereum'], 'usd'))
+            engine.runAndWait()
+            engine.stop()
+            break
+
+'''
+time_to_string()
+@output: t_string - The string representation of the current date and time.
+'''
 def time_to_string():
 
     t_string = ""
